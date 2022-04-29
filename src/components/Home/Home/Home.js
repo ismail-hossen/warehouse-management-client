@@ -1,21 +1,14 @@
-import React, { useEffect, useState } from "react";
 import { Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import useInventory from "../../hook/useInventory";
 import InventoryCard from "../Card/InventoryCard";
 import "./Home.css";
 
 const Home = () => {
-  const [inventory, setInventory] = useState([]);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    fetch("http://localhost:8080/inventory")
-      .then((res) => res.json())
-      .then((data) => setInventory(data));
-  }, []);
+  const inventory = useInventory();
 
   const handleUpdate = (id) => {
-    console.log(id);
     navigate(`inventory/${id}`)
   };
   return (

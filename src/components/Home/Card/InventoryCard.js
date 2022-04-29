@@ -2,18 +2,16 @@ import React from 'react';
 import { Button, Card, Col } from 'react-bootstrap';
 
 const InventoryCard = ({handleUpdate,inventory }) => {
-  const all = inventory;
-  console.log(all)
   return (
     <Col className='col-md-4'>
     <Card>
-      <Card.Img variant="top" src={all.image} />
+      <Card.Img variant="top" src={inventory.image} />
       <Card.Body>
-        <Card.Title>{all.name}</Card.Title>
+        <Card.Title>{inventory.name}</Card.Title>
         <Card.Text>
-          {all.description}
+          {inventory.description}
         </Card.Text>
-        <Card.Title>{all.quantity}</Card.Title>
+        <Card.Title>Supplier: {inventory.supplierName}</Card.Title>
       </Card.Body>
       <Button variant="primary" onClick={()=>handleUpdate(inventory._id)}>update</Button>
     </Card>
