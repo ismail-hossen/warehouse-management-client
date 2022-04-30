@@ -1,34 +1,47 @@
-import React, { useEffect, useState } from "react";
-import { Card, Button, Row } from "react-bootstrap";
+import React, { useEffect, useRef, useState } from "react";
+import { Card, Button, Row, Form } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 
 const Inventory = () => {
   const { id } = useParams();
   const [inventory, setInventory] = useState([]);
   const [reload, setReload] = useState(false);
+  const ref = useRef(null);
 
   // get one item for details page
   useEffect(() => {
     fetch(`http://localhost:8080/inventory/${id}`)
       .then((res) => res.json(res))
-      .then((data) =>{
-        setReload(!reload)
-         setInventory(data)
+      .then((data) => {
+        setReload(!reload);
+        setInventory(data);
       });
   }, [id, reload]);
 
-  const handleReduce = () => {
-    console.log("id", id);
-    // reduce quantity by id
+  //handle reduce quantity by id
+  const handleReduce = (id) => {
     fetch(`http://localhost:8080/quantity/${id}`, {
       method: "PUT",
     })
       .then((res) => res.json(res))
       .then((data) => {
-        setReload(!reload)
-        console.log(data)
+        setReload(!reload);
       });
   };
+
+  // handle add quantity by id
+  const updateQuantity = (id) => {
+    const quantity = {quantity: ref.current.value};
+    fetch(`http://localhost:8080/add-quantity/${id}`, {
+      method: "PUT",
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(quantity),
+    }).then((res) => res.json(res))
+    .then(data =>{
+      setReload(!reload);
+    })
+  };
+
   return (
     <div>
       <Row className="justify-content-center my-5">
@@ -40,10 +53,14 @@ const Inventory = () => {
             <Card.Title>Supplier: {inventory.supplierName}</Card.Title>
             <Card.Text>{inventory.quantity}</Card.Text>
           </Card.Body>
-          <Button onClick={handleReduce} variant="primary">
+          <Button onClick={()=>handleReduce(inventory._id)} variant="primary">
             delivered
           </Button>
         </Card>
+        <Form.Control ref={ref} type="number" placeholder="Add quantity" />
+        <Button variant="primary" onClick={() => updateQuantity(inventory._id)}>
+          Submit
+        </Button>
       </Row>
     </div>
   );
