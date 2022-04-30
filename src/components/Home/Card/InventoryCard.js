@@ -12,6 +12,7 @@ const InventoryCard = ({handleUpdate,inventory }) => {
           {inventory.description}
         </Card.Text>
         <Card.Title>Supplier: {inventory.supplierName}</Card.Title>
+        <Card.Title>In Stock: {inventory.quantity}</Card.Title>
       </Card.Body>
       <Button variant="primary" onClick={()=>handleUpdate(inventory._id)}>update</Button>
     </Card>
