@@ -15,6 +15,9 @@
   justify-content: space-between;
 }
 
+.brandArea a{
+  text-decoration: none;
+}
 .logo {
   font-weight: bold;
   font-size: 30px;

@@ -31,15 +31,16 @@ const Inventory = () => {
 
   // handle add quantity by id
   const updateQuantity = (id) => {
-    const quantity = {quantity: ref.current.value};
+    const quantity = { quantity: ref.current.value };
     fetch(`http://localhost:8080/add-quantity/${id}`, {
       method: "PUT",
-      headers: {'Content-Type': 'application/json'},
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(quantity),
-    }).then((res) => res.json(res))
-    .then(data =>{
-      setReload(!reload);
     })
+      .then((res) => res.json(res))
+      .then((data) => {
+        setReload(!reload);
+      });
   };
 
   return (
@@ -53,15 +54,18 @@ const Inventory = () => {
             <Card.Title>Supplier: {inventory.supplierName}</Card.Title>
             <Card.Text>{inventory.quantity}</Card.Text>
           </Card.Body>
-          <Button onClick={()=>handleReduce(inventory._id)} variant="primary">
+          <Button onClick={() => handleReduce(inventory._id)} variant="primary">
             delivered
           </Button>
         </Card>
+      </Row>
+      <div>
+        <h1>restock the items</h1>
         <Form.Control ref={ref} type="number" placeholder="Add quantity" />
         <Button variant="primary" onClick={() => updateQuantity(inventory._id)}>
           Submit
         </Button>
-      </Row>
+      </div>
     </div>
   );
 };
