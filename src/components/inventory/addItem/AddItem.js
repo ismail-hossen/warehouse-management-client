@@ -1,7 +1,11 @@
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
+import auth from "../../../firebase.init";
 
 const AddItem = () => {
+  const [user] = useAuthState(auth);
+
   const {
     register,
     handleSubmit,
@@ -31,12 +35,14 @@ const AddItem = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <input
+        readOnly
         placeholder="Email Address"
-        defaultValue="ssa"
+        defaultValue={user && user?.email}
         {...register("email", { required: true })}
       />
       <input placeholder="Name" {...register("name", { required: true })} />
       <input
+        defaultValue={user && user?.displayName}
         placeholder="Supplier name"
         {...register("supplier", { required: true })}
       />
