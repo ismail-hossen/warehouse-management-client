@@ -7,6 +7,7 @@ import "./Home.css";
 const Home = () => {
   const navigate = useNavigate();
   const inventory = useInventory();
+console.log(inventory);
 
   const handleUpdate = (id) => navigate(`inventory/${id}`);
 

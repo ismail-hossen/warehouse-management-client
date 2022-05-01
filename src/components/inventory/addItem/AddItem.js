@@ -9,18 +9,18 @@ const AddItem = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-      const inventory = {
-          name: data.name,
-          quantity: data.quantity,
-          price: data.price,
-          email: data.email,
-          supplierName: data.supplier,
-          image: data.image
-    }
+    const inventory = {
+      name: data.name,
+      quantity: data.quantity,
+      price: data.price,
+      email: data.email,
+      supplierName: data.supplier,
+      image: data.image,
+    };
     fetch("http://localhost:8080/add-inventory", {
       method: "POST",
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(inventory)
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(inventory),
     })
       .then((res) => res.json(res))
       .then((data) => {

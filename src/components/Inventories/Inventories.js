@@ -8,10 +8,10 @@ const Inventories = () => {
   const navigate = useNavigate();
   const [reload, setReload] = useState(false);
   const handleNavigate = () => navigate("/add-item");
-  const inventory = useInventory();
+  const inventory = useInventory(reload);
 
   const handleDelete = (id) => {
-    console.log(id);
+
     //handle reduce quantity by id
     fetch(`http://localhost:8080/delete/${id}`, {
       method: "DELETE",

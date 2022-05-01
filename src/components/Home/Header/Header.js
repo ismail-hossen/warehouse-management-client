@@ -12,6 +12,9 @@ const Header = () => {
           </Link>
         </div>
         <div className="pathArea">
+          <Link to="home" className="pathContainer">
+            Home
+          </Link>
           <Link to="manage-items" className="pathContainer">
             Manage Items
           </Link>
