@@ -7,7 +7,7 @@ import TableRow from "./TableRow";
 const Inventories = () => {
   const navigate = useNavigate();
   const [reload, setReload] = useState(false);
-  const handleNavigate = () => navigate("add-item");
+  const handleNavigate = () => navigate("/add-item");
   const inventory = useInventory();
 
   const handleDelete = (id) => {
