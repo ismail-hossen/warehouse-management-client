@@ -6,12 +6,11 @@ import "./Home.css";
 
 const Home = () => {
   const navigate = useNavigate();
-  const inventory = useInventory();
-console.log(inventory);
+  const getData = useInventory();
+  const inventory = getData.slice(0, 6)
+  const handleUpdate = (id) => navigate(`/inventory/${id}`);
 
-  const handleUpdate = (id) => navigate(`inventory/${id}`);
-
-  const handleInventory = () => navigate("manage-items");
+  const handleInventory = () => navigate("/manage-items");
   return (
     <div>
       <Row className="container-fluid g-4">

@@ -1,8 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from "../../../firebase.init";
+import { signOut } from 'firebase/auth';
+
 
 const Header = () => {
+  const [user, loading] = useAuthState(auth);  
+  
   return (
     <div className="headerArea">
       <div className="headerWrapper">
@@ -27,9 +33,11 @@ const Header = () => {
           <Link to="my-items" className="pathContainer">
             My Items
           </Link>
-          <Link to="login" className="pathContainer">
+          {user ? <Link to="/"onClick={() => signOut(auth)} className="pathContainer">
+            Logout
+          </Link> : <Link to="login" className="pathContainer">
             login
-          </Link>
+          </Link>}
         </div>
       </div>
     </div>
