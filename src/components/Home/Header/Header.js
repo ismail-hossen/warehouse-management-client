@@ -4,9 +4,10 @@ import "./Header.css";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 import { signOut } from "firebase/auth";
+import { NavDropdown } from "react-bootstrap";
 
 const Header = () => {
-  const [user] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
 
   return (
     <div className="headerArea">
@@ -17,42 +18,69 @@ const Header = () => {
           </Link>
         </div>
         <div className="pathArea">
-          <Link to="home" className="pathContainer">
-            Home
-          </Link>
-          <Link to="blogs" className="pathContainer">
-            blogs
-          </Link>
-
-          {user ? (
-            <>
-              <Link to="manage-items" className="pathContainer">
-                Manage Items
-              </Link>
-              <Link to="add-item" className="pathContainer">
-                Add Item
-              </Link>
-              <Link to="my-items" className="pathContainer">
-                My Items
-              </Link>
-            </>
-          ) : (
-            ""
-          )}
-
-          {user ? (
-            <Link
-              to="/"
-              onClick={() => signOut(auth)}
-              className="pathContainer"
-            >
-              Logout
+          <div>
+            <Link to="home" className="pathContainer">
+              Home
             </Link>
-          ) : (
-            <Link to="login" className="pathContainer">
-              login
+            <Link to="blogs" className="pathContainer">
+              blogs
             </Link>
-          )}
+          </div>
+          <div className="user-access">
+            {loading ? (
+              <Link to="login" className="pathContainer">
+                login
+              </Link>
+            ) : (
+              <>
+                {user ? (
+                  <>
+                    <NavDropdown
+                      className="navDropdown"
+                      title="Manage"
+                      id="basic-nav-dropdown"
+                    >
+                      <NavDropdown.Item
+                        href="manage-items"
+                        className="pathContainer"
+                      >
+                        {" "}
+                        Manage Items
+                      </NavDropdown.Item>
+                      <NavDropdown.Item
+                        href="add-item"
+                        className="pathContainer"
+                      >
+                        {" "}
+                        Add Item
+                      </NavDropdown.Item>
+                      <NavDropdown.Item
+                        href="my-items"
+                        className="pathContainer"
+                      >
+                        My Items
+                      </NavDropdown.Item>
+                    </NavDropdown>
+                  </>
+                ) : (
+                  ""
+                )}
+                {user ? (
+                  <Link
+                    to="/"
+                    onClick={() => signOut(auth)}
+                    className="pathContainer"
+                  >
+                    Logout
+                  </Link>
+                ) : (
+                  <Link to="login" className="pathContainer">
+                    login
+                  </Link>
+                )}
+              </>
+            )}
+          </div>
         </div>
       </div>
     </div>

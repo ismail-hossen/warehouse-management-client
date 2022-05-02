@@ -9,8 +9,6 @@ const Inventories = () => {
   const [reload, setReload] = useState(false);
   const handleNavigate = () => navigate("/add-item");
   const inventory = useInventory(reload);
-  console.log('all data', inventory);
-  
 
   const handleDelete = (id) => {
     //handle reduce quantity by id
@@ -19,7 +17,7 @@ const Inventories = () => {
     })
       .then((res) => res.json(res))
       .then((data) => {
-        console.log(data)
+        console.log(data);
         setReload(!reload);
       });
   };
@@ -31,7 +29,7 @@ const Inventories = () => {
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>No.</th>
+            <th>Serial No.</th>
             <th>Name</th>
             <th>In Stock</th>
             <th>Supplier Name</th>
@@ -40,8 +38,9 @@ const Inventories = () => {
         </thead>
         <tbody>
           {inventory
-            ? inventory.map((data) => (
+            ? inventory.map((data, index) => (
                 <TableRow
+                index={index}
                   key={data._id}
                   handleDelete={handleDelete}
                   inventory={data}

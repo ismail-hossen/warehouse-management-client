@@ -35,7 +35,6 @@ const AddItem = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <input
-        readOnly
         placeholder="Email Address"
         defaultValue={user && user?.email}
         {...register("email", { required: true })}

@@ -43,8 +43,9 @@ const MyItems = () => {
         </thead>
         <tbody>
           {myItem
-            ? myItem.map((data) => (
+            ? myItem.map((data, index) => (
                 <TableRow
+                index={index}
                   key={data._id}
                   handleDelete={handleDelete}
                   inventory={data}
