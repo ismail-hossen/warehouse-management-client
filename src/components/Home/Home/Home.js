@@ -7,7 +7,7 @@ import InventoryCard from "../Card/InventoryCard";
 import "./Home.css";
 
 const Home = () => {
-  const [user, loading] = useAuthState(auth);
+  const [user] = useAuthState(auth);
   const navigate = useNavigate();
   const getData = useInventory();
   const inventory = getData.slice(0, 6);
