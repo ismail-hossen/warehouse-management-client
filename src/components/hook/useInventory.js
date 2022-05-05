@@ -8,7 +8,6 @@ function useInventory(reload) {
       .then((res) => res.json())
       .then((data) => setInventory(data));
   }, [reload]);
-
   return inventory;
 }
 

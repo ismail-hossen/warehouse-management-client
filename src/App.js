@@ -1,7 +1,9 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import About from "./components/About/About";
 import Login from "./components/Auth/login/Login";
 import PrivateRoute from "./components/Auth/PrivateRoute";
+import Blogs from "./components/Blogs/Blogs";
 import Footer from "./components/Home/Footer/Footer";
 import Header from "./components/Home/Header/Header";
 import Home from "./components/Home/Home/Home";
@@ -30,6 +32,8 @@ const App = () => {
         <Route path="/add-item" element={<AddItem />} />
         <Route path="/my-items" element={<MyItems />} />
         <Route path="/Login" element={<Login />} />
+        <Route path="/blogs" element={<Blogs />} />
+        <Route path="/about" element={<About />} />
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
       <Footer />

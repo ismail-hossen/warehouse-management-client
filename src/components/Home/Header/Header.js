@@ -23,7 +23,10 @@ const Header = () => {
               Home
             </Link>
             <Link to="blogs" className="pathContainer">
-              blogs
+              Blogs
+            </Link>
+            <Link to="about" className="pathContainer">
+              About
             </Link>
           </div>
           <div className="user-access">

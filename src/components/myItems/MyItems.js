@@ -10,9 +10,31 @@ const MyItems = () => {
   const [reload, setReload] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/getItemByEmail?email=${user?.email}`)
-      .then((res) => res.json())
-      .then((data) => setMyItem(data));
+    fetch(
+      `http://localhost:8080/getItemByEmail?email=${user?.email}`,
+      {
+        headers: {
+          authorization: `${localStorage.getItem("accessToken")}`,
+        },
+      }
+    )
+      .then(async (response) => {
+        const isJson = response.headers
+          .get("content-type")
+          ?.includes("application/json");
+        const data = isJson ? await response.json() : null;
+
+        // check for error response
+        if (!response.ok) {
+          const error = (data && data.message) || response.status;
+          return Promise.reject(error);
+        }
+        const myData = JSON.parse(JSON.stringify(data, null, 4));
+        setMyItem(myData);
+      })
+      .catch((error) => {
+        console.log("There was an error!", error);
+      });
   }, [user, reload]);
 
   const handleDelete = (id) => {
@@ -45,7 +67,7 @@ const MyItems = () => {
           {myItem
             ? myItem.map((data, index) => (
                 <TableRow
-                index={index}
+                  index={index}
                   key={data._id}
                   handleDelete={handleDelete}
                   inventory={data}
