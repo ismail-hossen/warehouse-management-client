@@ -1,0 +1,17 @@
+.footerDescriptionArea {
+  font-size: 30px;
+  color: darkblue;
+}
+.footerDescription{
+    width: 350px;
+}
+.footerHeading {
+  color: #000;
+  font-size: 30px;
+  font-weight: bold;
+}
+.commonStyle {
+  color: rgb(98 92 92 / 49%);
+  margin-top: 20px;
+  font-size: 25px;
+}

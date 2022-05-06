@@ -21,7 +21,7 @@ const Login = () => {
 
   const [check, setCheck] = useState(false);
   const [signInWithGoogle, user, loading] = useSignInWithGoogle(auth);
-  const [signInWithEmail, user2, loading2, error2] =
+  const [signInWithEmail, user2, loading2] =
     useSignInWithEmailAndPassword(auth);
   const [createUserWithEmailAndPassword, user3, loading3] =
     useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
@@ -59,28 +59,10 @@ const Login = () => {
   const resetPassword = async () => {
     if (email) {
       await sendPasswordResetEmail(email);
-      // toast("Sent email");
-      toast.success("Sent email", {
-        position: "top-center",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.success("Sent Reset email");
     } else {
       toast.warn(
-        "provide email and password then try to login then try reset button",
-        {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: undefined,
-        }
+        "provide email and password then try to login then try reset button"
       );
     }
   };
@@ -105,6 +87,7 @@ const Login = () => {
       </div>
     );
   }
+
   if (user || user2 || user3) {
     navigate(from, { replace: true });
   }
@@ -138,11 +121,11 @@ const Login = () => {
           </p>
         )}
       </span>
+      <ToastContainer />
       <br />
       <Button variant="primary" onClick={() => signInWithGoogle()}>
         Google
       </Button>
-      <ToastContainer />
     </div>
   );
 };
