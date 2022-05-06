@@ -37,9 +37,9 @@ const Footer = () => {
           <h2 className="commonStyle">Contact Us</h2>
         </div>
       </div>
-      <div className="container-fluid d-flex justify-content-around mt-3">
-        <p className="commonStyle">@2022 Impel. All rights reserved</p>
-        <div className="d-flex">
+      <div className="container d-flex justify-content-around mt-4 mb-4">
+        <p className="commonStyle col-8">@2022 Impel. All rights reserved</p>
+        <div className="d-flex col-4 justify-content-between">
         <h2 className="commonStyle">Terms &amp; Agreements </h2>
         <h2 className="commonStyle"> Privacy Policy </h2>
         </div>

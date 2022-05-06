@@ -24,12 +24,11 @@ const Home = () => {
           usemap="#image-map"
           alt=""
         />
-
         <map name="image-map">
           <area
             target="_blank"
-            alt="let's with our new company to start your busniess journy"
-            title="let's with our new company to start your busniess journy"
+            alt="let's with our new company to start your business journey"
+            title="let's with our new company to start your business journey"
             href="#"
             coords="250,210,900,280"
             shape="rect"
@@ -37,7 +36,7 @@ const Home = () => {
         </map>
       </div>
       <div>
-        <h1 className="serviceHeading">Inventory</h1>
+        <h1 className="serviceHeading">Dealership Inventory</h1>
         <Row className="container-fluid g-4">
           {inventory.map((data) => (
             <InventoryCard
@@ -47,6 +46,8 @@ const Home = () => {
             ></InventoryCard>
           ))}
         </Row>
+      </div>
+      <div className="manageButton">
         {user && (
           <Button variant="primary" onClick={handleInventory}>
             Manage Inventories

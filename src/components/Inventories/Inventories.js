@@ -21,26 +21,28 @@ const Inventories = () => {
         setReload(!reload);
       });
   };
+
   return (
-    <div>
-      <Button variant="primary" onClick={handleNavigate}>
-        add new item
-      </Button>
-      <Table striped bordered hover>
+    <div className="container-fluid mt-5 mb-5">
+      <Table responsive="sm" striped bordered hover>
         <thead>
           <tr>
             <th>Serial No.</th>
             <th>Name</th>
             <th>In Stock</th>
             <th>Supplier Name</th>
-            <th>remove</th>
+            <th>
+              <Button variant="primary" onClick={handleNavigate}>
+                add new item
+              </Button>
+            </th>
           </tr>
         </thead>
         <tbody>
           {inventory
             ? inventory.map((data, index) => (
                 <TableRow
-                index={index}
+                  index={index}
                   key={data._id}
                   handleDelete={handleDelete}
                   inventory={data}

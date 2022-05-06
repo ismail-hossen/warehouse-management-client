@@ -52,7 +52,8 @@ const Inventory = () => {
             <Card.Title>{inventory.name}</Card.Title>
             <Card.Text>{inventory.description}</Card.Text>
             <Card.Title>Supplier: {inventory.supplierName}</Card.Title>
-            <Card.Text>{inventory.quantity}</Card.Text>
+            <Card.Text>Stock: {inventory.quantity}</Card.Text>
+            <Card.Text>Sold: {inventory.sold}</Card.Text>
           </Card.Body>
           <Button onClick={() => handleReduce(inventory._id)} variant="primary">
             delivered

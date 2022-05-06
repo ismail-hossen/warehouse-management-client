@@ -1,45 +1,42 @@
+import { signOut } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import TableRow from "../Inventories/TableRow";
 
 const MyItems = () => {
   const [user] = useAuthState(auth);
+  const navigate = useNavigate();
   const [myItem, setMyItem] = useState([]);
   const [reload, setReload] = useState(false);
 
   useEffect(() => {
-    fetch(
-      `http://localhost:8080/getItemByEmail?email=${user?.email}`,
-      {
-        headers: {
-          authorization: `${localStorage.getItem("accessToken")}`,
-        },
-      }
-    )
-      .then(async (response) => {
-        const isJson = response.headers
-          .get("content-type")
-          ?.includes("application/json");
-        const data = isJson ? await response.json() : null;
+    fetch(`http://localhost:8080/getItemByEmail?email=${user?.email}`, {
+      headers: {
+        authorization: `${localStorage.getItem("accessToken")}`,
+      },
+    }).then(async (response) => {
+      const isJson = response.headers
+        .get("content-type")
+        ?.includes("application/json");
+      const data = isJson ? await response.json() : null;
 
-        // check for error response
-        if (!response.ok) {
-          const error = (data && data.message) || response.status;
-          return Promise.reject(error);
-        }
-        const myData = JSON.parse(JSON.stringify(data, null, 4));
-        setMyItem(myData);
-      })
-      .catch((error) => {
-        console.log("There was an error!", error);
-      });
-  }, [user, reload]);
+      if (response.status === 401 || response.status === 403) {
+        signOut(auth);
+        navigate("/login");
+      }
+      const myData = JSON.parse(JSON.stringify(data, null, 4));
+      setMyItem(myData);
+    });
+  }, [user, reload, navigate]);
 
   const handleDelete = (id) => {
     //handle delete my item by one
-    const isConfirm = window.confirm("Are you sure to execute this action?");
+    const isConfirm = window.confirm(
+      "Would you like to remove this item from the list?"
+    );
     if (isConfirm === true) {
       fetch(`http://localhost:8080/delete/${id}`, {
         method: "DELETE",
@@ -52,7 +49,7 @@ const MyItems = () => {
     }
   };
   return (
-    <div>
+    <div className="container-fluid mt-5 mb-5">
       <Table striped bordered hover>
         <thead>
           <tr>

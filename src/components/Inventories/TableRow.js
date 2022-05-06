@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 
-const TableRow = ({ inventory, handleDelete, count, index}) => {
+const TableRow = ({ inventory, handleDelete, index }) => {
   const { name, quantity, supplierName, _id } = inventory;
   return (
     <tr>
