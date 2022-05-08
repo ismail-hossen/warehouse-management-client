@@ -10,7 +10,7 @@ const Inventory = () => {
 
   // get one item for details page
   useEffect(() => {
-    fetch(`http://localhost:8080/inventory/${id}`)
+    fetch(`  http://localhost:8080/inventory/${id}`)
       .then((res) => res.json(res))
       .then((data) => {
         setReload(!reload);
@@ -20,7 +20,7 @@ const Inventory = () => {
 
   //handle reduce quantity by id
   const handleReduce = (id) => {
-    fetch(`http://localhost:8080/quantity/${id}`, {
+    fetch(`  http://localhost:8080/quantity/${id}`, {
       method: "PUT",
     })
       .then((res) => res.json(res))
@@ -32,7 +32,7 @@ const Inventory = () => {
   // handle add quantity by id
   const updateQuantity = (id) => {
     const quantity = { quantity: ref.current.value };
-    fetch(`http://localhost:8080/add-quantity/${id}`, {
+    fetch(`  http://localhost:8080/add-quantity/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(quantity),
@@ -41,6 +41,8 @@ const Inventory = () => {
       .then((data) => {
         setReload(!reload);
       });
+
+    ref.current.value = "";
   };
 
   return (
@@ -48,25 +50,36 @@ const Inventory = () => {
       <Row className="justify-content-center my-5">
         <Card className="w-50">
           <Card.Img variant="top" src={inventory.image} />
-          <Card.Body>
-            <Card.Title>{inventory.name}</Card.Title>
-            <Card.Text>{inventory.description}</Card.Text>
-            <Card.Title>Supplier: {inventory.supplierName}</Card.Title>
-            <Card.Text>Stock: {inventory.quantity}</Card.Text>
-            <Card.Text>Sold: {inventory.sold}</Card.Text>
+          <Card.Body className="d-flex mt-3 mb-3">
+            <div className="col-7">
+              <Card.Title>{inventory.name}</Card.Title>
+              <Card.Text>{inventory.description}</Card.Text>
+              <Card.Title>Supplier: {inventory.supplierName}</Card.Title>
+              <Card.Text>Stock: {inventory.quantity}</Card.Text>
+              <Card.Text>Sold: {inventory.sold}</Card.Text>
+            </div>
+            <div className="col-5 d-flex flex-column align-items-center justify-content-center border-bottom border-start ">
+              <h3 className="text-center mb-2">Restock the items</h3>
+              <div className="d-flex justify-content-center">
+                <Form.Control
+                  ref={ref}
+                  type="number"
+                  placeholder="Add quantity"
+                />
+                <Button
+                  variant="primary"
+                  onClick={() => updateQuantity(inventory._id)}
+                >
+                  Submit
+                </Button>
+              </div>
+            </div>
           </Card.Body>
           <Button onClick={() => handleReduce(inventory._id)} variant="primary">
             delivered
           </Button>
         </Card>
       </Row>
-      <div>
-        <h1>restock the items</h1>
-        <Form.Control ref={ref} type="number" placeholder="Add quantity" />
-        <Button variant="primary" onClick={() => updateQuantity(inventory._id)}>
-          Submit
-        </Button>
-      </div>
     </div>
   );
 };

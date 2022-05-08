@@ -13,7 +13,7 @@ const MyItems = () => {
   const [reload, setReload] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/getItemByEmail?email=${user?.email}`, {
+    fetch(`  http://localhost:8080/getItemByEmail?email=${user?.email}`, {
       headers: {
         authorization: `${localStorage.getItem("accessToken")}`,
       },
@@ -38,7 +38,7 @@ const MyItems = () => {
       "Would you like to remove this item from the list?"
     );
     if (isConfirm === true) {
-      fetch(`http://localhost:8080/delete/${id}`, {
+      fetch(`  http://localhost:8080/delete/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json(res))

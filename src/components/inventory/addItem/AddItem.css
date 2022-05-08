@@ -1,0 +1,23 @@
+.input {
+  height: 45px;
+  outline: none;
+  border: 1px solid #555;
+  font-size: 20px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.submitBtn {
+  background-color: #55555540;
+  outline: none;
+  border: 1px solid #555;
+  font-size: 25px;
+  font-weight: 700;
+  color: #141212;
+  text-transform: uppercase;
+  border-radius: 4px;
+}
+.submitBtn:hover {
+  background-color: #55555561;
+  color: #555555ed;
+}

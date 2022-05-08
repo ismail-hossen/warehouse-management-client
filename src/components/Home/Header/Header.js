@@ -5,6 +5,11 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 import { signOut } from "firebase/auth";
 import { NavDropdown } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faRightFromBracket,
+  faBarsProgress,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
   const [user, loading] = useAuthState(auth);
@@ -18,7 +23,7 @@ const Header = () => {
           </Link>
         </div>
         <div className="pathArea">
-          <div>
+          <div className="w-50">
             <Link to="home" className="pathContainer">
               Home
             </Link>
@@ -29,7 +34,7 @@ const Header = () => {
               About
             </Link>
           </div>
-          <div className="user-access">
+          <div className="user-access w-50">
             {loading ? (
               <Link to="login" className="pathContainer">
                 login
@@ -39,8 +44,8 @@ const Header = () => {
                 {user ? (
                   <>
                     <NavDropdown
-                      className="navDropdown"
-                      title="Manage"
+                      className="navDropdown me-2"
+                      title={<FontAwesomeIcon icon={faBarsProgress} />}
                       id="basic-nav-dropdown"
                     >
                       <NavDropdown.Item
@@ -64,22 +69,25 @@ const Header = () => {
                         My Items
                       </NavDropdown.Item>
                     </NavDropdown>
+
+                    <Link
+                    title="Logout"
+                      className="pathContainer d-flex justify-content-center align-items-center"
+                      to="/"
+                      onClick={() => signOut(auth)}
+                    >
+                      <FontAwesomeIcon
+                        className="fs-5 ms-1"
+                        icon={faRightFromBracket}
+                      />
+                    </Link>
                   </>
                 ) : (
-                  ""
-                )}
-                {user ? (
-                  <Link
-                    to="/"
-                    onClick={() => signOut(auth)}
-                    className="pathContainer"
-                  >
-                    Logout
-                  </Link>
-                ) : (
-                  <Link to="login" className="pathContainer">
-                    login
-                  </Link>
+                  <>
+                    <Link to="login" className="pathContainer">
+                      login
+                    </Link>
+                  </>
                 )}
               </>
             )}

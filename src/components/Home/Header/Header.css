@@ -33,21 +33,28 @@
 .pathArea {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   width: 90%;
 }
 .user-access {
   display: flex;
   align-items: center;
   text-decoration: none;
+  justify-content: flex-end;
 }
 
 .pathContainer {
   cursor: pointer;
   margin-right: 10px;
+  font-size: 20px;
   text-decoration: none;
   color: #555;
 }
+.pathContainer::before {
+  content: "";
+  border-left: 1px solid rgb(95 93 93 / 10%);
+  margin-right: 8px;
+}
 .navDropdown a{
   color: #555;
+  font-size: 20px;
 }

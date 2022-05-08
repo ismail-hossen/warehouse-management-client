@@ -41,7 +41,7 @@ const Login = () => {
       createUserWithEmailAndPassword(data.email, data.password);
     } else {
       signInWithEmail(data.email, data.password);
-      fetch("http://localhost:8080/generate", {
+      fetch("  http://localhost:8080/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: data.email }),
