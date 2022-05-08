@@ -23,7 +23,7 @@ const AddItem = () => {
       supplierName: data.supplier,
       image: data.image,
     };
-    fetch("  http://localhost:8080/add-inventory", {
+    fetch(" https://intense-temple-54232.herokuapp.com/add-inventory", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(inventory),
