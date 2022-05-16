@@ -13,7 +13,7 @@ const MyItems = () => {
   const [reload, setReload] = useState(false);
 
   useEffect(() => {
-    fetch(` https://intense-temple-54232.herokuapp.com/getItemByEmail?email=${user?.email}`, {
+    fetch(` https://still-everglades-64188.herokuapp.com/getItemByEmail?email=${user?.email}`, {
       headers: {
         authorization: `${localStorage.getItem("accessToken")}`,
       },
@@ -38,7 +38,7 @@ const MyItems = () => {
       "Would you like to remove this item from the list?"
     );
     if (isConfirm === true) {
-      fetch(` https://intense-temple-54232.herokuapp.com/delete/${id}`, {
+      fetch(` https://still-everglades-64188.herokuapp.com/delete/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json(res))

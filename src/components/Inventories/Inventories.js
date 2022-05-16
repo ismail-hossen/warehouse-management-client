@@ -16,7 +16,7 @@ const Inventories = () => {
   const handleNavigate = () => navigate("/add-item");
 
   const fetchData = (page) =>
-    fetch(`http://localhost:8080/queryData?page=${page}`).then((res) =>
+    fetch(`https://still-everglades-64188.herokuapp.com/queryData?page=${page}`).then((res) =>
       res.json()
     );
   const { data } = useQuery(["queryData", activePage], () =>
@@ -28,7 +28,7 @@ const Inventories = () => {
     const count = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:8080/totalInventoryCount"
+          "https://still-everglades-64188.herokuapp.com/totalInventoryCount"
         );
         const countPages = Math.ceil(data?.count / 10);
         setPages(countPages);
@@ -41,7 +41,7 @@ const Inventories = () => {
 
   //handle reduce quantity by id
   const handleDelete = (id) => {
-    fetch(`http://localhost:8080/delete/${id}`, {
+    fetch(`https://still-everglades-64188.herokuapp.com/delete/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json(res))

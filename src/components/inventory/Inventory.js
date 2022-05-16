@@ -10,7 +10,7 @@ const Inventory = () => {
 
   // get one item for details page
   useEffect(() => {
-    fetch(` https://intense-temple-54232.herokuapp.com/inventory/${id}`)
+    fetch(` https://still-everglades-64188.herokuapp.com/inventory/${id}`)
       .then((res) => res.json(res))
       .then((data) => {
         setReload(!reload);
@@ -20,7 +20,7 @@ const Inventory = () => {
 
   //handle reduce quantity by id
   const handleReduce = (id) => {
-    fetch(` https://intense-temple-54232.herokuapp.com/quantity/${id}`, {
+    fetch(` https://still-everglades-64188.herokuapp.com/quantity/${id}`, {
       method: "PUT",
     })
       .then((res) => res.json(res))
@@ -32,7 +32,7 @@ const Inventory = () => {
   // handle add quantity by id
   const updateQuantity = (id) => {
     const quantity = { quantity: ref.current.value };
-    fetch(` https://intense-temple-54232.herokuapp.com/add-quantity/${id}`, {
+    fetch(` https://still-everglades-64188.herokuapp.com/add-quantity/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(quantity),
